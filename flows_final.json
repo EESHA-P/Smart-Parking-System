@@ -1,0 +1,962 @@
+[
+    {
+        "id": "32bdbc6d04ffeb37",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "d09df0669e54b0ea",
+        "type": "tab",
+        "label": "Smart Parking System Complete",
+        "disabled": false
+    },
+    {
+        "id": "main_tab",
+        "type": "ui_tab",
+        "name": "Smart Parking System Complete",
+        "icon": "mi-local_parking",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "mqtt_broker",
+        "type": "mqtt-broker",
+        "name": "Local MQTT",
+        "broker": "broker.hivemq.com",
+        "port": "1883",
+        "clientid": "parking_demo123_stuti",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 15,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "stats_group",
+        "type": "ui_group",
+        "name": "Dashboard Overview",
+        "tab": "main_tab",
+        "order": 1,
+        "disp": true,
+        "width": "12",
+        "collapse": false
+    },
+    {
+        "id": "parking_grid",
+        "type": "ui_group",
+        "name": "Parking Visualization",
+        "tab": "main_tab",
+        "order": 2,
+        "disp": true,
+        "width": "12",
+        "collapse": false
+    },
+    {
+        "id": "control_group",
+        "type": "ui_group",
+        "name": "Vehicle Management",
+        "tab": "main_tab",
+        "order": 3,
+        "disp": true,
+        "width": "12",
+        "collapse": false
+    },
+    {
+        "id": "alerts_group",
+        "type": "ui_group",
+        "name": "Alerts & Notifications",
+        "tab": "main_tab",
+        "order": 4,
+        "disp": true,
+        "width": "12",
+        "collapse": false
+    },
+    {
+        "id": "69ad63aa0b25e61c",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "c9b24b8e4c758ee0",
+        "type": "inject",
+        "z": "d09df0669e54b0ea",
+        "name": "Init System",
+        "props": [],
+        "repeat": "",
+        "once": true,
+        "onceDelay": 0.5,
+        "topic": "",
+        "x": 120,
+        "y": 80,
+        "wires": [
+            [
+                "9d217df18ef9e0f6",
+                "init_db"
+            ]
+        ]
+    },
+    {
+        "id": "init_db",
+        "type": "function",
+        "z": "d09df0669e54b0ea",
+        "name": "Initialize Database",
+        "func": "// Initialize parking records database in flow context\nlet parkingRecords = flow.get(\"parkingRecords\") || [];\nlet reservations = flow.get(\"reservations\") || [];\nlet overstayAlerts = flow.get(\"overstayAlerts\") || [];\n\n// Create sample schema if empty\nif (parkingRecords.length === 0) {\n    parkingRecords = [];\n}\n\nflow.set(\"parkingRecords\", parkingRecords);\nflow.set(\"reservations\", reservations);\nflow.set(\"overstayAlerts\", overstayAlerts);\nnode.status({fill:\"green\",shape:\"dot\",text:`Database ready: ${parkingRecords.length} records`});\n\nreturn {payload: `Database initialized with ${parkingRecords.length} records`};",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9d217df18ef9e0f6",
+        "type": "function",
+        "z": "d09df0669e54b0ea",
+        "name": "Initialize Enhanced Slots",
+        "func": "let slots = {\n  1: {status: \"Available\", plateNumber: null, entryTime: null, exitTime: null, vehicleType: null, reservedUntil: null, reservedBy: null},\n  2: {status: \"Available\", plateNumber: null, entryTime: null, exitTime: null, vehicleType: null, reservedUntil: null, reservedBy: null},\n  3: {status: \"Available\", plateNumber: null, entryTime: null, exitTime: null, vehicleType: null, reservedUntil: null, reservedBy: null},\n  4: {status: \"Available\", plateNumber: null, entryTime: null, exitTime: null, vehicleType: null, reservedUntil: null, reservedBy: null},\n  5: {status: \"Available\", plateNumber: null, entryTime: null, exitTime: null, vehicleType: null, reservedUntil: null, reservedBy: null},\n  6: {status: \"Available\", plateNumber: null, entryTime: null, exitTime: null, vehicleType: null, reservedUntil: null, reservedBy: null}\n};\n\n// Vehicle type pricing configuration\nlet vehiclePricing = {\n  \"Motorcycle\": { basePrice: 15, multiplier: 1.0 },\n  \"Car\": { basePrice: 30, multiplier: 1.0 },\n  \"EV\": { basePrice: 45, multiplier: 1.2 }\n};\n\nflow.set(\"slots\", slots);\nflow.set(\"vehiclePricing\", vehiclePricing);\nreturn {payload: slots};",
+        "outputs": 1,
+        "x": 350,
+        "y": 100,
+        "wires": [
+            [
+                "8dc22c6cb4a81960"
+            ]
+        ]
+    },
+    {
+        "id": "852fc81046fcaa63",
+        "type": "function",
+        "z": "d09df0669e54b0ea",
+        "name": "Park Vehicle Enhanced",
+        "func": "let slots = flow.get(\"slots\");\nlet parkingRecords = flow.get(\"parkingRecords\") || [];\nlet reservations = flow.get(\"reservations\") || [];\n\nlet slotId = msg.payload.slotId;\nlet plateNumber = msg.payload.plateNumber;\nlet vehicleType = msg.payload.vehicleType || \"Car\";\n\n// Validate input\nif (!plateNumber || plateNumber.trim() === \"\") {\n    node.warn(\"No plate number provided\");\n    return null;\n}\n\nplateNumber = plateNumber.toUpperCase().trim();\n\n// Check if slot exists and is available or reserved for this vehicle\nif(slots && slots[slotId]){\n    let canPark = false;\n    let reservationMatch = false;\n    \n    if(slots[slotId].status === \"Available\") {\n        canPark = true;\n    } else if(slots[slotId].status === \"Reserved\" && slots[slotId].reservedBy === plateNumber) {\n        canPark = true;\n        reservationMatch = true;\n        // Remove the reservation\n        reservations = reservations.filter(r => !(r.slotId == slotId && r.plateNumber === plateNumber));\n    }\n    \n    if(canPark) {\n        let entryTime = new Date();\n        \n        // Update slot status\n        slots[slotId].status = \"Occupied\";\n        slots[slotId].plateNumber = plateNumber;\n        slots[slotId].entryTime = entryTime.toLocaleString();\n        slots[slotId].exitTime = null;\n        slots[slotId].vehicleType = vehicleType;\n        slots[slotId].reservedUntil = null;\n        slots[slotId].reservedBy = null;\n        \n        // Create parking record\n        let record = {\n            id: Date.now(),\n            plateNumber: plateNumber,\n            slotId: slotId,\n            vehicleType: vehicleType,\n            entryTime: entryTime.toISOString(),\n            entryTimeDisplay: entryTime.toLocaleString(),\n            exitTime: null,\n            exitTimeDisplay: null,\n            duration: null,\n            status: \"Parked\",\n            wasReserved: reservationMatch\n        };\n        \n        // Add to database\n        parkingRecords.push(record);\n        \n        // Update flow context\n        flow.set(\"slots\", slots);\n        flow.set(\"parkingRecords\", parkingRecords);\n        flow.set(\"reservations\", reservations);\n        \n        node.status({fill:\"green\",shape:\"dot\",text:`${plateNumber} parked in slot ${slotId}`});\n        \n        return {payload: slots, parkingRecord: record};\n    } else {\n        node.warn(`Slot ${slotId} is not available for ${plateNumber}`);\n        return null;\n    }\n} else {\n    node.warn(`Slot ${slotId} does not exist`);\n    return null;\n}",
+        "outputs": 1,
+        "x": 350,
+        "y": 160,
+        "wires": [
+            [
+                "8dc22c6cb4a81960",
+                "update_records_display",
+                "record_to_history"
+            ]
+        ]
+    },
+    {
+        "id": "7f46365db635b853",
+        "type": "function",
+        "z": "d09df0669e54b0ea",
+        "name": "Exit Vehicle Enhanced",
+        "func": "let slots = flow.get(\"slots\");\nlet parkingRecords = flow.get(\"parkingRecords\") || [];\nlet vehiclePricing = flow.get(\"vehiclePricing\") || {};\n\nlet slotId = msg.payload;\n\n// Check if slot exists and is occupied\nif(slots && slots[slotId] && slots[slotId].status === \"Occupied\"){\n    let exitTime = new Date();\n    let plateNumber = slots[slotId].plateNumber;\n    let vehicleType = slots[slotId].vehicleType || \"Car\";\n    \n    // Find the parking record\n    let recordIndex = parkingRecords.findIndex(r => \n        r.plateNumber === plateNumber && \n        r.slotId == slotId && \n        r.status === \"Parked\"\n    );\n    \n    if (recordIndex !== -1) {\n        // Calculate duration and pricing\n        let entryTime = new Date(parkingRecords[recordIndex].entryTime);\n        let durationMs = exitTime - entryTime;\n        let durationHours = Math.floor(durationMs / (1000 * 60 * 60));\n        let durationMinutes = Math.floor((durationMs % (1000 * 60 * 60)) / (1000 * 60));\n        let durationText = `${durationHours}h ${durationMinutes}m`;\n        \n        // Calculate pricing based on vehicle type and duration\n        let pricing = vehiclePricing[vehicleType] || { basePrice: 30, multiplier: 1.0 };\n        let totalHours = durationMs / (1000 * 60 * 60);\n        let price = Math.round(pricing.basePrice * pricing.multiplier * Math.ceil(totalHours));\n        \n        // Update parking record\n        parkingRecords[recordIndex].exitTime = exitTime.toISOString();\n        parkingRecords[recordIndex].exitTimeDisplay = exitTime.toLocaleString();\n        parkingRecords[recordIndex].duration = durationText;\n        parkingRecords[recordIndex].status = \"Completed\";\n        parkingRecords[recordIndex].price = price;\n    }\n    \n    // Clear slot\n    slots[slotId].status = \"Available\";\n    slots[slotId].plateNumber = null;\n    slots[slotId].entryTime = null;\n    slots[slotId].exitTime = exitTime.toLocaleString();\n    slots[slotId].vehicleType = null;\n    slots[slotId].reservedUntil = null;\n    slots[slotId].reservedBy = null;\n    \n    // Update flow context\n    flow.set(\"slots\", slots);\n    flow.set(\"parkingRecords\", parkingRecords);\n    \n    node.status({fill:\"blue\",shape:\"dot\",text:`${plateNumber} exited from slot ${slotId}`});\n    \n    return {payload: slots, exitRecord: parkingRecords[recordIndex]};\n} else {\n    node.warn(`Slot ${slotId} is not occupied`);\n    return null;\n}",
+        "outputs": 1,
+        "x": 350,
+        "y": 220,
+        "wires": [
+            [
+                "8dc22c6cb4a81960",
+                "update_records_display",
+                "record_to_history"
+            ]
+        ]
+    },
+    {
+        "id": "record_to_history",
+        "type": "function",
+        "z": "d09df0669e54b0ea",
+        "name": "Record User Parking Data",
+        "func": "// Record actual user parking data to CSV file\n// This matches the format of IIoT_Smart_Parking_Management.csv\n\nlet slots = flow.get(\"slots\") || {};\nlet parkingRecords = flow.get(\"parkingRecords\") || [];\n\n// Get the most recent parking action\nlet recentRecord = parkingRecords[parkingRecords.length - 1];\nif (!recentRecord) {\n    return null; // No parking action to record\n}\n\n// Count current occupancy\nlet occupied = Object.values(slots).filter(s => s.status === \"Occupied\").length;\nlet reserved = Object.values(slots).filter(s => s.status === \"Reserved\").length;\nlet totalSlots = 6;\nlet occupancyRate = (occupied / totalSlots).toFixed(4);\n\n// Determine occupancy status\nlet occupancyStatus = recentRecord.status === \"Parked\" ? \"Occupied\" : \"Vacant\";\n\n// Create CSV line matching IIoT_Smart_Parking_Management.csv format\nlet timestamp = new Date();\nlet entryHour = recentRecord.entryTime ? new Date(recentRecord.entryTime).getHours() : 0;\nlet exitHour = recentRecord.exitTime ? new Date(recentRecord.exitTime).getHours() : 0;\nlet duration = recentRecord.duration ? recentRecord.duration.replace('h', '').replace('m', '').trim().split(' ')[0] : 0;\nlet paymentStatus = recentRecord.status === \"Completed\" ? \"Paid\" : \"Unpaid\";\nlet vehicleType = recentRecord.vehicleType || \"Car\";\n\n// Format: Timestamp,Parking_Spot_ID,Occupancy_Status,Vehicle_Type,User_Type,Reserved_Status,Occupancy_Rate,Entry_Time,Exit_Time,Parking_Duration,Payment_Status,plate_number\nlet csvLine = `${timestamp.toISOString().replace('T', ' ').replace('Z', '')},${recentRecord.slotId},${occupancyStatus},${vehicleType},Registered,${reserved > 0 ? 1 : 0},${occupancyRate},${entryHour},${exitHour},${duration},${paymentStatus},${recentRecord.plateNumber}`;\n\nnode.status({fill:\"blue\",shape:\"dot\",text:`Recording: ${occupancyStatus} (${occupied}/${totalSlots})`});\n\n// Send CSV line to file writer\nreturn {\n    payload: csvLine,\n    topic: \"record_parking\"\n};",
+        "outputs": 1,
+        "x": 600,
+        "y": 190,
+        "wires": [
+            [
+                "python_record_history"
+            ]
+        ]
+    },
+    {
+        "id": "python_record_history",
+        "type": "file",
+        "z": "d09df0669e54b0ea",
+        "name": "📝 Save to user_parking_data.csv",
+        "filename": "C:\\Users\\ASUS\\.node-red\\user_parking_data.csv",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "false",
+        "encoding": "utf8",
+        "x": 860,
+        "y": 190,
+        "wires": [
+            [
+                "history_record_success"
+            ]
+        ]
+    },
+    {
+        "id": "history_record_success",
+        "type": "debug",
+        "z": "d09df0669e54b0ea",
+        "name": "History Record Success",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1110,
+        "y": 170,
+        "wires": []
+    },
+    {
+        "id": "history_record_error",
+        "type": "debug",
+        "z": "d09df0669e54b0ea",
+        "name": "History Record Error",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1110,
+        "y": 210,
+        "wires": []
+    },
+    {
+        "id": "reserve_slot",
+        "type": "function",
+        "z": "d09df0669e54b0ea",
+        "name": "Reserve Slot",
+        "func": "let slots = flow.get(\"slots\");\nlet reservations = flow.get(\"reservations\") || [];\n\nlet slotId = msg.payload.slotId;\nlet plateNumber = msg.payload.plateNumber;\nlet reservationDuration = 15; // 15 minutes\n\n// Validate input\nif (!plateNumber || plateNumber.trim() === \"\") {\n    node.warn(\"No plate number provided for reservation\");\n    return null;\n}\n\nplateNumber = plateNumber.toUpperCase().trim();\n\n// Check if slot exists and is available\nif(slots && slots[slotId] && slots[slotId].status === \"Available\"){\n    let now = new Date();\n    let reservedUntil = new Date(now.getTime() + (reservationDuration * 60000));\n    \n    // Update slot status\n    slots[slotId].status = \"Reserved\";\n    slots[slotId].reservedBy = plateNumber;\n    slots[slotId].reservedUntil = reservedUntil.toLocaleString();\n    \n    // Create reservation record\n    let reservation = {\n        id: Date.now(),\n        slotId: slotId,\n        plateNumber: plateNumber,\n        reservedAt: now.toISOString(),\n        reservedUntil: reservedUntil.toISOString(),\n        status: \"Active\"\n    };\n    \n    reservations.push(reservation);\n    \n    // Update flow context\n    flow.set(\"slots\", slots);\n    flow.set(\"reservations\", reservations);\n    \n    node.status({fill:\"yellow\",shape:\"dot\",text:`Slot ${slotId} reserved for ${plateNumber}`});\n    \n    return {payload: slots, reservation: reservation};\n} else {\n    node.warn(`Slot ${slotId} is not available for reservation`);\n    return null;\n}",
+        "outputs": 1,
+        "x": 350,
+        "y": 300,
+        "wires": [
+            [
+                "8dc22c6cb4a81960",
+                "reservation_timer"
+            ]
+        ]
+    },
+    {
+        "id": "reservation_timer",
+        "type": "function",
+        "z": "d09df0669e54b0ea",
+        "name": "Start Reservation Timer",
+        "func": "let reservation = msg.reservation;\nif (!reservation) return null;\n\n// Set a timeout to expire the reservation\nlet timeoutMs = 15 * 60 * 1000; // 15 minutes\n\nsetTimeout(() => {\n    let slots = flow.get(\"slots\");\n    let reservations = flow.get(\"reservations\") || [];\n    \n    // Check if reservation is still active and not used\n    if (slots[reservation.slotId] && slots[reservation.slotId].status === \"Reserved\" && \n        slots[reservation.slotId].reservedBy === reservation.plateNumber) {\n        \n        // Expire the reservation\n        slots[reservation.slotId].status = \"Available\";\n        slots[reservation.slotId].reservedBy = null;\n        slots[reservation.slotId].reservedUntil = null;\n        \n        // Update reservation status\n        let resIndex = reservations.findIndex(r => r.id === reservation.id);\n        if (resIndex !== -1) {\n            reservations[resIndex].status = \"Expired\";\n        }\n        \n        flow.set(\"slots\", slots);\n        flow.set(\"reservations\", reservations);\n        \n        // Trigger dashboard update\n        node.send({payload: slots});\n    }\n}, timeoutMs);\n\nreturn null;",
+        "outputs": 1,
+        "x": 580,
+        "y": 300,
+        "wires": [
+            [
+                "8dc22c6cb4a81960"
+            ]
+        ]
+    },
+    {
+        "id": "overstay_checker",
+        "type": "inject",
+        "z": "d09df0669e54b0ea",
+        "name": "Overstay Check (Hourly)",
+        "props": [],
+        "repeat": "3600",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 150,
+        "y": 400,
+        "wires": [
+            [
+                "check_overstay"
+            ]
+        ]
+    },
+    {
+        "id": "check_overstay",
+        "type": "function",
+        "z": "d09df0669e54b0ea",
+        "name": "Check for Overstay",
+        "func": "let parkingRecords = flow.get(\"parkingRecords\") || [];\nlet overstayAlerts = flow.get(\"overstayAlerts\") || [];\nlet maxDurationHours = 24; // 24 hours maximum\n\nlet now = new Date();\nlet overstayVehicles = [];\n\n// Check all currently parked vehicles\nparkingRecords.forEach(record => {\n    if (record.status === \"Parked\") {\n        let entryTime = new Date(record.entryTime);\n        let durationMs = now - entryTime;\n        let durationHours = durationMs / (1000 * 60 * 60);\n        \n        if (durationHours > maxDurationHours) {\n            overstayVehicles.push({\n                plateNumber: record.plateNumber,\n                slotId: record.slotId,\n                entryTime: record.entryTime,\n                durationHours: Math.round(durationHours * 100) / 100,\n                vehicleType: record.vehicleType\n            });\n        }\n    }\n});\n\n// Create alerts for new overstay vehicles\noverstayVehicles.forEach(vehicle => {\n    let existingAlert = overstayAlerts.find(alert => \n        alert.plateNumber === vehicle.plateNumber && \n        alert.slotId === vehicle.slotId &&\n        alert.status === \"Active\"\n    );\n    \n    if (!existingAlert) {\n        let alert = {\n            id: Date.now() + Math.random(),\n            plateNumber: vehicle.plateNumber,\n            slotId: vehicle.slotId,\n            vehicleType: vehicle.vehicleType,\n            entryTime: vehicle.entryTime,\n            durationHours: vehicle.durationHours,\n            alertTime: now.toISOString(),\n            status: \"Active\",\n            severity: vehicle.durationHours > 48 ? \"Critical\" : \"Warning\"\n        };\n        \n        overstayAlerts.push(alert);\n    }\n});\n\nflow.set(\"overstayAlerts\", overstayAlerts);\n\nif (overstayVehicles.length > 0) {\n    node.status({fill:\"red\",shape:\"dot\",text:`${overstayVehicles.length} overstay alerts`});\n    return {payload: overstayVehicles, alerts: overstayAlerts};\n} else {\n    node.status({fill:\"green\",shape:\"dot\",text:\"No overstay detected\"});\n    return null;\n}",
+        "outputs": 1,
+        "x": 350,
+        "y": 400,
+        "wires": [
+            [
+                "overstay_display"
+            ]
+        ]
+    },
+    {
+        "id": "update_reservations_display",
+        "type": "function",
+        "z": "d09df0669e54b0ea",
+        "name": "Update Reservations Display",
+        "func": "let reservations = flow.get(\"reservations\") || [];\n\n// Filter active reservations\nlet activeReservations = reservations.filter(r => r.status === \"Active\");\n\n// Sort by reservation time (most recent first)\nactiveReservations.sort((a, b) => new Date(b.reservedAt) - new Date(a.reservedAt));\n\nreturn {payload: activeReservations};",
+        "outputs": 1,
+        "x": 560,
+        "y": 500,
+        "wires": [
+            [
+                "reservation_status"
+            ]
+        ]
+    },
+    {
+        "id": "8dc22c6cb4a81960",
+        "type": "function",
+        "z": "d09df0669e54b0ea",
+        "name": "Update Enhanced Dashboard",
+        "func": "// Read current slots from flow context\nlet slots = flow.get(\"slots\") || {};\nlet parkingRecords = flow.get(\"parkingRecords\") || [];\nlet reservations = flow.get(\"reservations\") || [];\nlet overstayAlerts = flow.get(\"overstayAlerts\") || [];\n\n// Count different slot states\nlet available = Object.values(slots).filter(s => s.status === \"Available\").length;\nlet occupied = Object.values(slots).filter(s => s.status === \"Occupied\").length;\nlet reserved = Object.values(slots).filter(s => s.status === \"Reserved\").length;\nlet total = Object.keys(slots).length;\n\n// Calculate occupancy percentage\nlet occupancyRate = Math.round((occupied / total) * 100);\n\n// Entrance light: GREEN if any available, YELLOW if reserved, RED if none\nlet entranceColor = \"red\";\nif (available > 0) {\n    entranceColor = \"green\";\n} else if (reserved > 0) {\n    entranceColor = \"yellow\";\n}\n\n// Enhanced stats object\nlet stats = {\n    available: available,\n    occupied: occupied,\n    reserved: reserved,\n    total: total,\n    occupancyRate: occupancyRate,\n    totalRecords: parkingRecords.length,\n    activeReservations: reservations.filter(r => r.status === \"Active\").length,\n    overstayAlerts: overstayAlerts.filter(a => a.status === \"Active\").length,\n    lastUpdated: new Date().toLocaleString()\n};\n\n// Send 4 separate outputs:\nreturn [ \n    {payload: stats}, \n    {payload: entranceColor}, \n    {payload: slots}, \n    {payload: occupancyRate} \n];",
+        "outputs": 4,
+        "x": 580,
+        "y": 160,
+        "wires": [
+            [
+                "6e26c5b9e09b3330",
+                "occupancy_history_collector"
+            ],
+            [
+                "20fa232fda1ac912"
+            ],
+            [
+                "6f69df00b8a76b6b",
+                "update_reservations_display"
+            ],
+            [
+                "occupancy_gauge"
+            ]
+        ]
+    },
+    {
+        "id": "update_records_display",
+        "type": "function",
+        "z": "d09df0669e54b0ea",
+        "name": "Update Records Display",
+        "func": "let parkingRecords = flow.get(\"parkingRecords\") || [];\n\n// Sort by most recent first\nparkingRecords.sort((a, b) => new Date(b.entryTime) - new Date(a.entryTime));\n\nreturn {payload: parkingRecords};",
+        "outputs": 1,
+        "x": 570,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "occupancy_history_collector",
+        "type": "function",
+        "z": "d09df0669e54b0ea",
+        "name": "Collect Occupancy History",
+        "func": "// Enhanced Occupancy History Collector with better initialization\nlet history = flow.get(\"occupancyHistory\") || [];\nlet now = new Date();\n\n// Get current slot states for better prediction\nlet slots = flow.get(\"slots\") || {};\nlet reserved = Object.values(slots).filter(s => s.status === \"Reserved\").length;\n\n// Create data point\nlet dataPoint = {\n    time: now.toISOString(),\n    occupied: msg.payload.occupied || 0,\n    available: msg.payload.available || 0,\n    reserved: reserved || 0,\n    total: msg.payload.total || 6,\n    occupancyRate: msg.payload.occupancyRate || 0,\n    effectiveOccupancy: (msg.payload.occupied || 0) + (reserved || 0) // Total unavailable slots\n};\n\n// Add to history\nhistory.push(dataPoint);\n\n// Keep only last 500 records\nif (history.length > 500) {\n    history.shift();\n}\n\n// Save to flow context\nflow.set(\"occupancyHistory\", history);\n\n// Log for debugging\nnode.status({\n    fill: \"blue\",\n    shape: \"dot\",\n    text: `History: ${history.length} records`\n});\n\n// Pass the history as JSON string to Python\nreturn {\n    payload: JSON.stringify(history),\n    occupancyRate: msg.payload.occupancyRate || 0,\n    reserved: reserved || 0,\n    historyLength: history.length\n};",
+        "outputs": 3,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 730,
+        "y": 55,
+        "wires": [
+            [
+                "calculate_pricing"
+            ],
+            [],
+            [
+                "prepare_python_input"
+            ]
+        ]
+    },
+    {
+        "id": "calculate_pricing",
+        "type": "function",
+        "z": "d09df0669e54b0ea",
+        "name": "Dynamic Pricing",
+        "func": "let occupancyRate = msg.occupancyRate || 0;\nlet basePrice = 30;\nlet multiplier = 1 + (occupancyRate / 100);\nlet price = Math.round(basePrice * multiplier);\nflow.set(\"currentPrice\", price);\nreturn {payload: price};",
+        "outputs": 1,
+        "x": 900,
+        "y": 100,
+        "wires": [
+            [
+                "current_price_card"
+            ]
+        ]
+    },
+    {
+        "id": "current_price_card",
+        "type": "ui_template",
+        "z": "d09df0669e54b0ea",
+        "group": "stats_group",
+        "name": "Current Price",
+        "order": 6,
+        "width": 6,
+        "height": 2,
+        "format": "<div style=\"padding:15px; background:#fffbe6; border-radius:10px; text-align:center;\"><h4>Parking Price (₹)</h4><p style=\"font-size:1.8em;color:#e65100;font-weight:bold;\">{{msg.payload}}</p></div>",
+        "storeOutMessages": false,
+        "fwdInMessages": false,
+        "resendOnRefresh": true,
+        "x": 1100,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "mqtt_in_park",
+        "type": "mqtt in",
+        "z": "d09df0669e54b0ea",
+        "name": "MQTT Park Vehicle",
+        "topic": "parking/park",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "mqtt_broker",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 460,
+        "wires": [
+            [
+                "route_actions"
+            ]
+        ]
+    },
+    {
+        "id": "mqtt_in_leave",
+        "type": "mqtt in",
+        "z": "d09df0669e54b0ea",
+        "name": "MQTT Exit Vehicle",
+        "topic": "parking/leave",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "mqtt_broker",
+        "inputs": 0,
+        "x": 140,
+        "y": 500,
+        "wires": [
+            [
+                "route_actions"
+            ]
+        ]
+    },
+    {
+        "id": "mqtt_out_status",
+        "type": "mqtt out",
+        "z": "d09df0669e54b0ea",
+        "name": "MQTT Publish Slots",
+        "topic": "parking/status",
+        "qos": "1",
+        "retain": "true",
+        "broker": "mqtt_broker",
+        "x": 960,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "mqtt_out_stats",
+        "type": "mqtt out",
+        "z": "d09df0669e54b0ea",
+        "name": "MQTT Publish Stats",
+        "topic": "parking/stats",
+        "qos": "1",
+        "retain": "true",
+        "broker": "mqtt_broker",
+        "x": 960,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "mqtt_out_price",
+        "type": "mqtt out",
+        "z": "d09df0669e54b0ea",
+        "name": "MQTT Publish Price",
+        "topic": "parking/price",
+        "qos": "1",
+        "retain": "true",
+        "broker": "mqtt_broker",
+        "x": 1300,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "route_actions",
+        "type": "switch",
+        "z": "d09df0669e54b0ea",
+        "name": "Route Actions",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "park",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "leave",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "reserve",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 340,
+        "y": 500,
+        "wires": [
+            [
+                "852fc81046fcaa63"
+            ],
+            [
+                "7f46365db635b853"
+            ],
+            [
+                "reserve_slot"
+            ]
+        ]
+    },
+    {
+        "id": "control_buttons",
+        "type": "ui_template",
+        "z": "d09df0669e54b0ea",
+        "group": "control_group",
+        "name": "Enhanced Control Panel",
+        "order": 1,
+        "width": 12,
+        "height": 10,
+        "format": "<style>\n.control-panel {\n    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);\n    border-radius: 20px;\n    padding: 25px;\n    margin: 10px;\n    color: white;\n}\n\n.control-title {\n    text-align: center;\n    font-size: 1.6em;\n    font-weight: bold;\n    margin-bottom: 25px;\n    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);\n}\n\n.button-grid {\n    display: grid;\n    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));\n    gap: 20px;\n}\n\n.slot-group {\n    background: rgba(255,255,255,0.1);\n    padding: 20px;\n    border-radius: 12px;\n    backdrop-filter: blur(10px);\n    border: 1px solid rgba(255,255,255,0.2);\n}\n\n.slot-label {\n    text-align: center;\n    font-weight: bold;\n    margin-bottom: 15px;\n    font-size: 1.1em;\n    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);\n}\n\n.control-btn {\n    width: 100%;\n    padding: 12px 16px;\n    border: none;\n    border-radius: 8px;\n    font-weight: bold;\n    font-size: 0.9em;\n    cursor: pointer;\n    transition: all 0.3s ease;\n    text-transform: uppercase;\n    letter-spacing: 1px;\n    box-shadow: 0 4px 15px rgba(0,0,0,0.2);\n    margin-bottom: 10px;\n}\n\n.park-btn {\n    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);\n    color: white;\n}\n\n.park-btn:hover {\n    background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);\n    transform: translateY(-2px);\n}\n\n.leave-btn {\n    background: linear-gradient(135deg, #f44336 0%, #da190b 100%);\n    color: white;\n}\n\n.leave-btn:hover {\n    background: linear-gradient(135deg, #da190b 0%, #c8170a 100%);\n    transform: translateY(-2px);\n}\n\n.reserve-btn {\n    background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);\n    color: white;\n}\n\n.reserve-btn:hover {\n    background: linear-gradient(135deg, #f57c00 0%, #ef6c00 100%);\n    transform: translateY(-2px);\n}\n\n.input-group {\n    margin: 10px 0;\n}\n\n.plate-input {\n    width: 100%;\n    padding: 10px;\n    border: 2px solid rgba(255,255,255,0.3);\n    border-radius: 6px;\n    background: rgba(255,255,255,0.9);\n    font-size: 0.9em;\n    text-transform: uppercase;\n    letter-spacing: 1px;\n    font-weight: bold;\n    text-align: center;\n}\n\n.plate-input:focus {\n    outline: none;\n    border-color: #4CAF50;\n    background: white;\n}\n\n.vehicle-select {\n    width: 100%;\n    padding: 10px;\n    border: 2px solid rgba(255,255,255,0.3);\n    border-radius: 6px;\n    background: rgba(255,255,255,0.9);\n    font-size: 0.9em;\n    font-weight: bold;\n    text-align: center;\n}\n\n.vehicle-select:focus {\n    outline: none;\n    border-color: #4CAF50;\n    background: white;\n}\n\n.input-label {\n    display: block;\n    margin-bottom: 5px;\n    font-size: 0.8em;\n    opacity: 0.9;\n}\n</style>\n\n<div class=\"control-panel\">\n    <div class=\"control-title\">🎮 Enhanced Vehicle Management</div>\n    \n    <div class=\"button-grid\">\n        <div class=\"slot-group\" ng-repeat=\"i in [1,2,3,4,5,6]\">\n            <div class=\"slot-label\">Slot {{i}}</div>\n            \n            <div class=\"input-group\">\n                <label class=\"input-label\">License Plate Number:</label>\n                <input type=\"text\" \n                       class=\"plate-input\" \n                       placeholder=\"Enter plate number\"\n                       ng-model=\"plateNumbers[i]\"\n                       maxlength=\"12\">\n            </div>\n            \n            <div class=\"input-group\">\n                <label class=\"input-label\">Vehicle Type:</label>\n                <select class=\"vehicle-select\" ng-model=\"vehicleTypes[i]\">\n                    <option value=\"Car\">🚗 Car</option>\n                    <option value=\"Motorcycle\">🏍️ Motorcycle</option>\n                    <option value=\"EV\">⚡ EV</option>\n                </select>\n            </div>\n            \n            <button class=\"control-btn park-btn\" \n                    ng-click=\"parkVehicle(i)\">\n                🚗 Park Vehicle\n            </button>\n            \n            <button class=\"control-btn reserve-btn\" \n                    ng-click=\"reserveSlot(i)\">\n                ⏰ Reserve Slot\n            </button>\n            \n            <button class=\"control-btn leave-btn\" \n                    ng-click=\"exitVehicle(i)\">\n                🚪 Exit Vehicle\n            </button>\n        </div>\n    </div>\n</div>\n\n<script>\n(function(scope) {\n    // Initialize plate numbers and vehicle types objects\n    scope.plateNumbers = scope.plateNumbers || {};\n    scope.vehicleTypes = scope.vehicleTypes || {};\n    \n    // Set default vehicle types\n    for (let i = 1; i <= 6; i++) {\n        if (!scope.vehicleTypes[i]) {\n            scope.vehicleTypes[i] = 'Car';\n        }\n    }\n    \n    // Park vehicle function\n    scope.parkVehicle = function(slotId) {\n        let plateNumber = scope.plateNumbers[slotId];\n        let vehicleType = scope.vehicleTypes[slotId];\n        \n        if (!plateNumber || plateNumber.trim() === '') {\n            alert('Please enter a license plate number!');\n            return;\n        }\n        \n        scope.send({\n            payload: {\n                slotId: slotId,\n                plateNumber: plateNumber.trim().toUpperCase(),\n                vehicleType: vehicleType\n            },\n            topic: 'park'\n        });\n        \n        // Clear the input after parking\n        scope.plateNumbers[slotId] = '';\n    };\n    \n    // Reserve slot function\n    scope.reserveSlot = function(slotId) {\n        let plateNumber = scope.plateNumbers[slotId];\n        \n        if (!plateNumber || plateNumber.trim() === '') {\n            alert('Please enter a license plate number for reservation!');\n            return;\n        }\n        \n        scope.send({\n            payload: {\n                slotId: slotId,\n                plateNumber: plateNumber.trim().toUpperCase()\n            },\n            topic: 'reserve'\n        });\n        \n        // Clear the input after reservation\n        scope.plateNumbers[slotId] = '';\n    };\n    \n    // Exit vehicle function\n    scope.exitVehicle = function(slotId) {\n        scope.send({\n            payload: slotId,\n            topic: 'leave'\n        });\n    };\n})(scope);\n</script>",
+        "storeOutMessages": true,
+        "fwdInMessages": false,
+        "resendOnRefresh": false,
+        "x": 160,
+        "y": 500,
+        "wires": [
+            [
+                "route_actions"
+            ]
+        ]
+    },
+    {
+        "id": "6e26c5b9e09b3330",
+        "type": "ui_template",
+        "z": "d09df0669e54b0ea",
+        "group": "stats_group",
+        "name": "Enhanced Stats Cards",
+        "order": 1,
+        "width": 12,
+        "height": 4,
+        "format": "<style>\n.stats-container {\n    display: grid;\n    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));\n    gap: 15px;\n    padding: 10px;\n}\n\n.stat-card {\n    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);\n    border-radius: 12px;\n    padding: 20px;\n    color: white;\n    text-align: center;\n    box-shadow: 0 8px 32px rgba(0,0,0,0.1);\n    backdrop-filter: blur(10px);\n    border: 1px solid rgba(255,255,255,0.1);\n    transition: transform 0.3s ease;\n}\n\n.stat-card:hover {\n    transform: translateY(-5px);\n}\n\n.stat-card.available {\n    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);\n}\n\n.stat-card.occupied {\n    background: linear-gradient(135deg, #fc466b 0%, #3f5efb 100%);\n}\n\n.stat-card.reserved {\n    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);\n}\n\n.stat-card.total {\n    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);\n}\n\n.stat-card.records {\n    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);\n}\n\n.stat-card.alerts {\n    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);\n}\n\n.stat-number {\n    font-size: 2.2em;\n    font-weight: bold;\n    margin-bottom: 5px;\n}\n\n.stat-label {\n    font-size: 0.9em;\n    opacity: 0.9;\n    text-transform: uppercase;\n    letter-spacing: 1px;\n}\n\n.stat-icon {\n    font-size: 1.3em;\n    margin-bottom: 8px;\n}\n</style>\n\n<div class=\"stats-container\">\n    <div class=\"stat-card available\">\n        <div class=\"stat-icon\">🟢</div>\n        <div class=\"stat-number\">{{msg.payload.available}}</div>\n        <div class=\"stat-label\">Available</div>\n    </div>\n    <div class=\"stat-card occupied\">\n        <div class=\"stat-icon\">🔴</div>\n        <div class=\"stat-number\">{{msg.payload.occupied}}</div>\n        <div class=\"stat-label\">Occupied</div>\n    </div>\n    <div class=\"stat-card reserved\">\n        <div class=\"stat-icon\">🟡</div>\n        <div class=\"stat-number\">{{msg.payload.reserved}}</div>\n        <div class=\"stat-label\">Reserved</div>\n    </div>\n    <div class=\"stat-card total\">\n        <div class=\"stat-icon\">🏢</div>\n        <div class=\"stat-number\">{{msg.payload.total}}</div>\n        <div class=\"stat-label\">Total Slots</div>\n    </div>\n    <div class=\"stat-card records\">\n        <div class=\"stat-icon\">📊</div>\n        <div class=\"stat-number\">{{msg.payload.totalRecords}}</div>\n        <div class=\"stat-label\">Total Records</div>\n    </div>\n    <div class=\"stat-card alerts\" ng-if=\"msg.payload.overstayAlerts > 0\">\n        <div class=\"stat-icon\">⚠️</div>\n        <div class=\"stat-number\">{{msg.payload.overstayAlerts}}</div>\n        <div class=\"stat-label\">Overstay Alerts</div>\n    </div>\n</div>\n\n<div style=\"text-align: center; margin-top: 10px; color: #666; font-size: 0.9em;\">\n    Last Updated: {{msg.payload.lastUpdated}}\n</div>",
+        "storeOutMessages": false,
+        "fwdInMessages": false,
+        "resendOnRefresh": true,
+        "x": 800,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "occupancy_gauge",
+        "type": "ui_gauge",
+        "z": "d09df0669e54b0ea",
+        "name": "Occupancy Rate",
+        "group": "stats_group",
+        "order": 2,
+        "width": 6,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Occupancy Rate",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": 100,
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": 33,
+        "seg2": 66,
+        "diff": false,
+        "className": "",
+        "x": 820,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "20fa232fda1ac912",
+        "type": "ui_template",
+        "z": "d09df0669e54b0ea",
+        "group": "stats_group",
+        "name": "Entrance Status",
+        "order": 3,
+        "width": 6,
+        "height": 4,
+        "format": "<style>\n.entrance-container {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    padding: 20px;\n    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);\n    border-radius: 15px;\n    color: white;\n    margin: 10px;\n    box-shadow: 0 10px 30px rgba(0,0,0,0.2);\n}\n\n.entrance-light {\n    width: 70px;\n    height: 70px;\n    border-radius: 50%;\n    margin-bottom: 15px;\n    box-shadow: 0 0 30px rgba(255,255,255,0.3);\n    animation: pulse 2s infinite;\n}\n\n.entrance-light.green {\n    background: radial-gradient(circle, #00ff88 0%, #00cc66 70%);\n    box-shadow: 0 0 30px rgba(0,255,136,0.6);\n}\n\n.entrance-light.yellow {\n    background: radial-gradient(circle, #ffeb3b 0%, #ffc107 70%);\n    box-shadow: 0 0 30px rgba(255,235,59,0.6);\n}\n\n.entrance-light.red {\n    background: radial-gradient(circle, #ff4444 0%, #cc0000 70%);\n    box-shadow: 0 0 30px rgba(255,68,68,0.6);\n}\n\n@keyframes pulse {\n    0% { transform: scale(1); }\n    50% { transform: scale(1.1); }\n    100% { transform: scale(1); }\n}\n\n.entrance-status {\n    font-size: 1.1em;\n    font-weight: bold;\n    text-transform: uppercase;\n    letter-spacing: 2px;\n}\n\n.entrance-message {\n    font-size: 0.8em;\n    opacity: 0.8;\n    margin-top: 5px;\n    text-align: center;\n}\n</style>\n\n<div class=\"entrance-container\">\n    <div class=\"entrance-light {{msg.payload}}\"></div>\n    <div class=\"entrance-status\">{{msg.payload === 'green' ? 'ENTER' : (msg.payload === 'yellow' ? 'RESERVED' : 'FULL')}}</div>\n    <div class=\"entrance-message\">\n        {{msg.payload === 'green' ? 'Parking Available' : (msg.payload === 'yellow' ? 'Reserved Slots Only' : 'No Spaces Available')}}\n    </div>\n</div>",
+        "storeOutMessages": false,
+        "fwdInMessages": false,
+        "resendOnRefresh": true,
+        "x": 840,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6f69df00b8a76b6b",
+        "type": "ui_template",
+        "z": "d09df0669e54b0ea",
+        "group": "parking_grid",
+        "name": "Enhanced Parking Grid",
+        "order": 1,
+        "width": 12,
+        "height": 8,
+        "format": "<style>\n.parking-lot {\n    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);\n    border-radius: 20px;\n    padding: 20px;\n    margin: 10px;\n    min-height: 500px;\n    position: relative;\n    overflow: visible;\n}\n\n.parking-lot::before {\n    content: '';\n    position: absolute;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    background: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><defs><pattern id=\"grid\" width=\"10\" height=\"10\" patternUnits=\"userSpaceOnUse\"><path d=\"M 10 0 L 0 0 0 10\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"0.5\" opacity=\"0.1\"/></pattern></defs><rect width=\"100\" height=\"100\" fill=\"url(%23grid)\"/></svg>')';\n    pointer-events: none;\n}\n\n.parking-title {\n    text-align: center;\n    color: white;\n    font-size: 1.8em;\n    font-weight: bold;\n    margin-bottom: 25px;\n    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);\n}\n\n.slots-grid {\n    display: grid;\n    grid-template-columns: repeat(3, 1fr);\n    gap: 15px;\n    position: relative;\n    z-index: 1;\n    max-width: 100%;\n    margin: 0 auto;\n}\n\n@media (max-width: 768px) {\n    .slots-grid {\n        grid-template-columns: repeat(2, 1fr);\n        gap: 12px;\n    }\n}\n\n@media (max-width: 480px) {\n    .slots-grid {\n        grid-template-columns: 1fr;\n        gap: 10px;\n    }\n}\n\n.parking-slot {\n    background: white;\n    border-radius: 12px;\n    padding: 15px;\n    text-align: center;\n    transition: all 0.3s ease;\n    box-shadow: 0 6px 20px rgba(0,0,0,0.15);\n    border: 3px solid transparent;\n    position: relative;\n    overflow: hidden;\n    min-height: 160px;\n    width: 100%;\n    box-sizing: border-box;\n}\n\n.parking-slot:hover {\n    transform: translateY(-3px);\n    box-shadow: 0 8px 25px rgba(0,0,0,0.2);\n}\n\n.parking-slot.available {\n    background: linear-gradient(135deg, #d4ffd4 0%, #a8ffa8 100%);\n    border-color: #4CAF50;\n}\n\n.parking-slot.occupied {\n    background: linear-gradient(135deg, #ffcccb 0%, #ff9999 100%);\n    border-color: #f44336;\n}\n\n.parking-slot.reserved {\n    background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);\n    border-color: #ffc107;\n    animation: pulse-reserved 2s infinite;\n}\n\n@keyframes pulse-reserved {\n    0% { box-shadow: 0 6px 20px rgba(255,193,7,0.3); }\n    50% { box-shadow: 0 6px 20px rgba(255,193,7,0.6); }\n    100% { box-shadow: 0 6px 20px rgba(255,193,7,0.3); }\n}\n\n.slot-number {\n    font-size: 1.1em;\n    font-weight: bold;\n    margin-bottom: 8px;\n    color: #333;\n}\n\n.slot-icon {\n    font-size: 2.2em;\n    margin: 6px 0;\n    display: block;\n}\n\n.slot-status {\n    font-weight: bold;\n    font-size: 0.8em;\n    text-transform: uppercase;\n    letter-spacing: 1px;\n    margin-top: 6px;\n    padding: 3px 6px;\n    border-radius: 10px;\n    display: inline-block;\n}\n\n.available .slot-status {\n    color: #2e7d32;\n    background: rgba(46,125,50,0.1);\n}\n\n.occupied .slot-status {\n    color: #c62828;\n    background: rgba(198,40,40,0.1);\n}\n\n.reserved .slot-status {\n    color: #f57c00;\n    background: rgba(245,124,0,0.1);\n}\n\n.plate-number {\n    font-size: 0.8em;\n    font-weight: bold;\n    background: #333;\n    color: white;\n    padding: 3px 6px;\n    border-radius: 4px;\n    margin: 6px 0;\n    letter-spacing: 1px;\n    display: inline-block;\n}\n\n.entry-time {\n    font-size: 0.65em;\n    color: #666;\n    margin-top: 4px;\n    font-style: italic;\n}\n\n.vehicle-type {\n    font-size: 0.75em;\n    font-weight: bold;\n    padding: 2px 5px;\n    border-radius: 3px;\n    margin: 3px 0;\n    display: inline-block;\n}\n\n.vehicle-type.motorcycle {\n    background: #e3f2fd;\n    color: #1976d2;\n}\n\n.vehicle-type.car {\n    background: #f3e5f5;\n    color: #7b1fa2;\n}\n\n.vehicle-type.ev {\n    background: #e8f5e8;\n    color: #388e3c;\n}\n\n.reserve-info {\n    font-size: 0.65em;\n    color: #f57c00;\n    margin-top: 4px;\n    font-weight: bold;\n    background: rgba(255,193,7,0.1);\n    padding: 3px 6px;\n    border-radius: 6px;\n    border: 1px solid rgba(255,193,7,0.3);\n}\n\n.reserve-timer {\n    font-size: 0.55em;\n    color: #ff6b35;\n    font-weight: bold;\n    margin-top: 2px;\n}\n\n.road-lines {\n    position: absolute;\n    width: 100%;\n    height: 3px;\n    background: repeating-linear-gradient(\n        90deg,\n        #ffeb3b 0px,\n        #ffeb3b 15px,\n        transparent 15px,\n        transparent 30px\n    );\n    top: 50%;\n    left: 0;\n    transform: translateY(-50%);\n    z-index: 0;\n}\n\n.slot-legend {\n    display: flex;\n    justify-content: center;\n    gap: 15px;\n    margin-top: 15px;\n    flex-wrap: wrap;\n}\n\n.legend-item {\n    display: flex;\n    align-items: center;\n    gap: 6px;\n    color: white;\n    font-size: 0.85em;\n}\n\n.legend-color {\n    width: 16px;\n    height: 16px;\n    border-radius: 3px;\n    border: 2px solid white;\n}\n</style>\n\n<div class=\"parking-lot\">\n    <div class=\"parking-title\">🚗 Smart Parking Lot (6 Slots)</div>\n    <div class=\"road-lines\"></div>\n    \n    <div class=\"slots-grid\">\n        <div ng-repeat=\"(id,slot) in msg.payload\" \n             class=\"parking-slot {{slot.status.toLowerCase()}}\">\n            <div class=\"slot-number\">Slot {{id}}</div>\n            <div class=\"slot-icon\">\n                {{slot.status === 'Occupied' ? '🚗' : (slot.status === 'Reserved' ? '⏰' : '🅿️')}}\n            </div>\n            <div class=\"slot-status\">{{slot.status}}</div>\n            <div class=\"plate-number\" ng-if=\"slot.plateNumber\">\n                {{slot.plateNumber}}\n            </div>\n            <div class=\"vehicle-type {{slot.vehicleType ? slot.vehicleType.toLowerCase() : ''}}\" ng-if=\"slot.vehicleType\">\n                {{slot.vehicleType}}\n            </div>\n            <div class=\"entry-time\" ng-if=\"slot.entryTime\">\n                Entry: {{slot.entryTime}}\n            </div>\n            <div class=\"reserve-info\" ng-if=\"slot.status === 'Reserved'\">\n                <div>Reserved for: {{slot.reservedBy}}</div>\n                <div>Until: {{slot.reservedUntil}}</div>\n                <div class=\"reserve-timer\">⏱️ Active</div>\n            </div>\n        </div>\n    </div>\n    \n    <div class=\"slot-legend\">\n        <div class=\"legend-item\">\n            <div class=\"legend-color\" style=\"background: linear-gradient(135deg, #d4ffd4 0%, #a8ffa8 100%);\"></div>\n            <span>Available</span>\n        </div>\n        <div class=\"legend-item\">\n            <div class=\"legend-color\" style=\"background: linear-gradient(135deg, #ffcccb 0%, #ff9999 100%);\"></div>\n            <span>Occupied</span>\n        </div>\n        <div class=\"legend-item\">\n            <div class=\"legend-color\" style=\"background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);\"></div>\n            <span>Reserved</span>\n        </div>\n    </div>\n</div>",
+        "storeOutMessages": false,
+        "fwdInMessages": false,
+        "resendOnRefresh": true,
+        "x": 800,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "reservation_status",
+        "type": "ui_template",
+        "z": "d09df0669e54b0ea",
+        "group": "alerts_group",
+        "name": "Active Reservations",
+        "order": 2,
+        "width": 12,
+        "height": 4,
+        "format": "<style>\n.reservations-container {\n    background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);\n    border-radius: 15px;\n    padding: 20px;\n    margin: 10px;\n    color: white;\n}\n\n.reservations-title {\n    text-align: center;\n    font-size: 1.4em;\n    font-weight: bold;\n    margin-bottom: 15px;\n    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);\n}\n\n.reservation-item {\n    background: rgba(255,255,255,0.1);\n    border-radius: 10px;\n    padding: 12px;\n    margin: 8px 0;\n    backdrop-filter: blur(10px);\n    border: 1px solid rgba(255,255,255,0.2);\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n}\n\n.reservation-details {\n    font-size: 0.9em;\n    line-height: 1.3;\n}\n\n.reservation-timer {\n    font-size: 0.8em;\n    font-weight: bold;\n    background: rgba(255,255,255,0.2);\n    padding: 4px 8px;\n    border-radius: 12px;\n}\n\n.no-reservations {\n    text-align: center;\n    padding: 20px;\n    font-size: 1em;\n    opacity: 0.8;\n}\n</style>\n\n<div class=\"reservations-container\">\n    <div class=\"reservations-title\">⏰ Active Reservations</div>\n    \n    <div ng-if=\"msg.payload && msg.payload.length > 0\">\n        <div class=\"reservation-item\" ng-repeat=\"reservation in msg.payload\">\n            <div class=\"reservation-details\">\n                <strong>Slot {{reservation.slotId}}</strong> - {{reservation.plateNumber}}<br>\n                <small>Reserved until: {{reservation.reservedUntil}}</small>\n            </div>\n            <div class=\"reservation-timer\">\n                ⏱️ Active\n            </div>\n        </div>\n    </div>\n    \n    <div ng-if=\"!msg.payload || msg.payload.length === 0\" class=\"no-reservations\">\n        ✅ No active reservations\n    </div>\n</div>",
+        "storeOutMessages": false,
+        "fwdInMessages": false,
+        "resendOnRefresh": true,
+        "x": 660,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "overstay_display",
+        "type": "ui_template",
+        "z": "d09df0669e54b0ea",
+        "group": "alerts_group",
+        "name": "Overstay Alerts",
+        "order": 1,
+        "width": 12,
+        "height": 6,
+        "format": "<style>\n.alerts-container {\n    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);\n    border-radius: 15px;\n    padding: 20px;\n    margin: 10px;\n    color: white;\n}\n\n.alerts-title {\n    text-align: center;\n    font-size: 1.6em;\n    font-weight: bold;\n    margin-bottom: 20px;\n    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);\n}\n\n.alert-item {\n    background: rgba(255,255,255,0.1);\n    border-radius: 10px;\n    padding: 15px;\n    margin: 10px 0;\n    backdrop-filter: blur(10px);\n    border: 1px solid rgba(255,255,255,0.2);\n}\n\n.alert-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    margin-bottom: 10px;\n}\n\n.alert-severity {\n    padding: 4px 8px;\n    border-radius: 20px;\n    font-size: 0.8em;\n    font-weight: bold;\n    text-transform: uppercase;\n}\n\n.severity-warning {\n    background: #ff9800;\n    color: white;\n}\n\n.severity-critical {\n    background: #f44336;\n    color: white;\n}\n\n.alert-details {\n    font-size: 0.9em;\n    line-height: 1.4;\n}\n\n.no-alerts {\n    text-align: center;\n    padding: 40px;\n    font-size: 1.1em;\n    opacity: 0.8;\n}\n</style>\n\n<div class=\"alerts-container\">\n    <div class=\"alerts-title\">⚠️ Overstay Alerts</div>\n    \n    <div ng-if=\"msg.payload && msg.payload.length > 0\">\n        <div class=\"alert-item\" ng-repeat=\"vehicle in msg.payload\">\n            <div class=\"alert-header\">\n                <strong>{{vehicle.plateNumber}}</strong>\n                <span class=\"alert-severity\" \n                      ng-class=\"vehicle.durationHours > 48 ? 'severity-critical' : 'severity-warning'\">\n                    {{vehicle.durationHours > 48 ? 'Critical' : 'Warning'}}\n                </span>\n            </div>\n            <div class=\"alert-details\">\n                <strong>Slot:</strong> {{vehicle.slotId}} | \n                <strong>Vehicle Type:</strong> {{vehicle.vehicleType}} | \n                <strong>Duration:</strong> {{vehicle.durationHours}} hours<br>\n                <strong>Entry Time:</strong> {{vehicle.entryTime}}\n            </div>\n        </div>\n    </div>\n    \n    <div ng-if=\"!msg.payload || msg.payload.length === 0\" class=\"no-alerts\">\n        ✅ No overstay alerts at this time\n    </div>\n</div>",
+        "storeOutMessages": false,
+        "fwdInMessages": false,
+        "resendOnRefresh": true,
+        "x": 580,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "pred_occupancy_card",
+        "type": "ui_template",
+        "z": "d09df0669e54b0ea",
+        "group": "stats_group",
+        "name": "Parking Availability Prediction",
+        "order": 5,
+        "width": 6,
+        "height": 4,
+        "format": "<style>\n.prediction-container {\n    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);\n    border-radius: 15px;\n    padding: 20px;\n    color: white;\n    text-align: center;\n    box-shadow: 0 8px 25px rgba(0,0,0,0.15);\n}\n\n.prediction-title {\n    font-size: 1.1em;\n    font-weight: bold;\n    margin-bottom: 15px;\n    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);\n}\n\n.prediction-status {\n    font-size: 1.8em;\n    font-weight: bold;\n    margin: 10px 0;\n    padding: 10px;\n    border-radius: 10px;\n    background: rgba(255,255,255,0.1);\n}\n\n.status-available {\n    color: #4CAF50;\n    background: rgba(76,175,80,0.2);\n}\n\n.status-warning {\n    color: #FF9800;\n    background: rgba(255,152,0,0.2);\n}\n\n.status-unavailable {\n    color: #f44336;\n    background: rgba(244,67,54,0.2);\n}\n\n.prediction-details {\n    font-size: 0.9em;\n    margin-top: 10px;\n    opacity: 0.9;\n}\n\n.prediction-details div {\n    margin: 8px 0;\n    padding: 5px;\n    background: rgba(255,255,255,0.1);\n    border-radius: 5px;\n}\n\n.confidence-badge {\n    display: inline-block;\n    padding: 4px 8px;\n    border-radius: 12px;\n    font-size: 0.8em;\n    font-weight: bold;\n    margin-top: 8px;\n}\n\n.confidence-high {\n    background: #4CAF50;\n    color: white;\n}\n\n.confidence-medium {\n    background: #FF9800;\n    color: white;\n}\n\n.confidence-low {\n    background: #f44336;\n    color: white;\n}\n\n.trend-indicator {\n    font-size: 0.85em;\n    margin-top: 8px;\n    padding: 5px 10px;\n    background: rgba(255,255,255,0.15);\n    border-radius: 8px;\n    display: inline-block;\n}\n\n.recommendation-box {\n    margin-top: 12px;\n    padding: 10px;\n    background: rgba(255,255,255,0.2);\n    border-radius: 8px;\n    font-size: 0.95em;\n    line-height: 1.4;\n}\n</style>\n\n<div class=\"prediction-container\">\n    <div class=\"prediction-title\">🔮 Parking Availability</div>\n    \n    <div ng-if=\"msg.payload && msg.payload.can_park_now !== undefined\">\n        <div class=\"prediction-status\" ng-class=\"msg.payload.can_park_now ? 'status-available' : 'status-unavailable'\">\n            {{msg.payload.can_park_now ? '✅ Can Park Now' : '❌ No Parking Available'}}\n        </div>\n        \n        <div class=\"prediction-details\">\n            <div><strong>Available Now:</strong> {{msg.payload.available_slots_now}} / {{msg.payload.total_slots}} slots</div>\n            <div><strong>Available in 30min:</strong> {{msg.payload.predicted_available_30min}} slots</div>\n            \n            <div ng-if=\"msg.payload.trend\" class=\"trend-indicator\">\n                <strong>Trend:</strong> \n                <span ng-if=\"msg.payload.trend === 'increasing'\">📈 Increasing</span>\n                <span ng-if=\"msg.payload.trend === 'decreasing'\">📉 Decreasing</span>\n                <span ng-if=\"msg.payload.trend === 'stable'\">➡️ Stable</span>\n            </div>\n        </div>\n        \n        <div class=\"recommendation-box\">\n            <strong>💡 Recommendation:</strong><br>\n            {{msg.payload.recommendation}}\n        </div>\n        \n        <div class=\"confidence-badge\" ng-class=\"{\n            'confidence-high': msg.payload.confidence === 'High',\n            'confidence-medium': msg.payload.confidence === 'Medium',\n            'confidence-low': msg.payload.confidence === 'Low' || msg.payload.confidence.includes('insufficient') || msg.payload.confidence.includes('no data')\n        }\">\n            {{msg.payload.confidence}} Confidence\n        </div>\n        \n        <div ng-if=\"msg.payload.data_points\" style=\"font-size: 0.7em; margin-top: 10px; opacity: 0.7;\">\n            Based on {{msg.payload.data_points}} data points\n        </div>\n    </div>\n    \n    <div ng-if=\"!msg.payload || msg.payload.can_park_now === undefined\">\n        <div class=\"prediction-status status-warning\">\n            ⏳ Analyzing Data...\n        </div>\n        <div class=\"prediction-details\">\n            Collecting parking data for prediction<br>\n            <small>Debug: {{msg.payload | json}}</small>\n        </div>\n    </div>\n</div>",
+        "storeOutMessages": false,
+        "fwdInMessages": false,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 1300,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "python_exec_node",
+        "type": "exec",
+        "z": "d09df0669e54b0ea",
+        "command": "cmd /c python \"C:\\Users\\ASUS\\.node-red\\parking_predictor.py\" predict",
+        "addpay": "true",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "30",
+        "winHide": false,
+        "oldrc": false,
+        "name": "🤖 Trained ML Predictor",
+        "x": 1240,
+        "y": 80,
+        "wires": [
+            [
+                "parse_python_output",
+                "debug_python_output"
+            ],
+            [
+                "python_error_handler",
+                "debug_python_error"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "parse_python_output",
+        "type": "function",
+        "z": "d09df0669e54b0ea",
+        "name": "Parse Python ML Output",
+        "func": "// Parse Python ML script output and format for dashboard\nlet pythonOutput = msg.payload;\n\nnode.log('Python ML output (length=' + (pythonOutput ? pythonOutput.length : 0) + '): ' + pythonOutput);\n\n// Check if output is empty\nif (!pythonOutput || pythonOutput.trim() === '') {\n    node.warn(\"Python returned empty output. Check stderr for errors.\");\n    return null;\n}\n\n// Try to parse JSON output from Python\nlet predictionResult;\ntry {\n    predictionResult = JSON.parse(pythonOutput);\n} catch (e) {\n    node.warn(\"Failed to parse Python output: \" + pythonOutput);\n    node.warn(\"Parse error: \" + e.message);\n    return null;\n}\n\n// Check for errors from Python\nif (predictionResult.error) {\n    node.warn(\"Python ML error: \" + predictionResult.error);\n    return null;\n}\n\n// Get current slot data for accurate availability\nlet slots = flow.get(\"slots\") || {};\nlet occupied = Object.values(slots).filter(s => s.status === \"Occupied\").length;\nlet reserved = Object.values(slots).filter(s => s.status === \"Reserved\").length;\nlet totalSlots = 6;\nlet availableNow = totalSlots - occupied - reserved;\n\n// Convert Python ML output to dashboard format\nlet isOccupied = predictionResult.predicted_occupancy === 1;\nlet confidence = predictionResult.confidence || 0.5;\nlet probabilityVacant = predictionResult.probability_vacant || 0;\nlet probabilityOccupied = predictionResult.probability_occupied || 0;\n\n// Determine trend based on probability\nlet trend = \"stable\";\nif (probabilityOccupied > 0.7) {\n    trend = \"increasing\";\n} else if (probabilityVacant > 0.7) {\n    trend = \"decreasing\";\n}\n\n// Create recommendation based on ML prediction\nlet recommendation = \"\";\nif (availableNow > 0) {\n    recommendation = `🤖 ML: ${availableNow} slots available now! Prediction: ${predictionResult.prediction_label} (${Math.round(confidence * 100)}% confidence)`;\n} else if (!isOccupied && probabilityVacant > 0.6) {\n    recommendation = `🤖 ML: Currently full, but likely to have space soon (${Math.round(probabilityVacant * 100)}% chance)`;\n} else {\n    recommendation = `🤖 ML: No spots available. High occupancy predicted (${Math.round(probabilityOccupied * 100)}% chance)`;\n}\n\nlet dashboardResult = {\n    \"can_park_now\": availableNow > 0,\n    \"available_slots_now\": availableNow,\n    \"predicted_available_30min\": isOccupied ? Math.max(0, availableNow - 1) : Math.min(totalSlots, availableNow + 1),\n    \"total_slots\": totalSlots,\n    \"trend\": trend,\n    \"recommendation\": recommendation,\n    \"confidence\": confidence > 0.8 ? \"High\" : (confidence > 0.6 ? \"Medium\" : \"Low\"),\n    \"data_points\": 1,\n    \"ml_prediction\": true,\n    \"python_confidence\": confidence,\n    \"probability_vacant\": probabilityVacant,\n    \"probability_occupied\": probabilityOccupied,\n    \"prediction_label\": predictionResult.prediction_label,\n    \"prediction_time\": predictionResult.prediction_time || new Date().toISOString(),\n    \"model_status\": \"✅ Trained ML Model Active\",\n    \"current_occupancy_rate\": Math.round((occupied / totalSlots) * 100),\n    \"reserved_slots\": reserved\n};\n\nnode.status({fill:\"green\",shape:\"dot\",text:\"ML Prediction: \" + predictionResult.prediction_label});\nreturn {payload: dashboardResult};",
+        "outputs": 1,
+        "x": 1480,
+        "y": 80,
+        "wires": [
+            [
+                "pred_occupancy_card"
+            ]
+        ]
+    },
+    {
+        "id": "python_error_handler",
+        "type": "function",
+        "z": "d09df0669e54b0ea",
+        "name": "Python Error Handler",
+        "func": "// Handle Python script errors and fallback to basic calculation\nnode.warn(\"Python ML failed: \" + msg.payload);\n\n// Fallback to basic availability calculation\nlet slots = flow.get(\"slots\") || {};\nlet occupied = Object.values(slots).filter(s => s.status === \"Occupied\").length;\nlet reserved = Object.values(slots).filter(s => s.status === \"Reserved\").length;\nlet totalSlots = 6;\nlet availableNow = totalSlots - occupied - reserved;\nlet canParkNow = availableNow > 0;\n\nlet fallbackResult = {\n    \"can_park_now\": canParkNow,\n    \"available_slots_now\": availableNow,\n    \"predicted_available_30min\": Math.max(0, availableNow + 1),\n    \"total_slots\": totalSlots,\n    \"trend\": \"stable\",\n    \"recommendation\": canParkNow ? \n        `🔄 Fallback: ${availableNow} slots available (Python ML unavailable)` : \n        \"🔄 Fallback: No parking available (Python ML unavailable)\",\n    \"confidence\": \"Medium (fallback mode)\",\n    \"data_points\": 1,\n    \"ml_prediction\": false,\n    \"fallback_mode\": true,\n    \"model_status\": \"Python ML Failed - Using Fallback\"\n};\n\nnode.status({fill:\"yellow\",shape:\"dot\",text:\"Python ML Failed - Using Fallback\"});\nreturn {payload: fallbackResult};",
+        "outputs": 1,
+        "x": 1250,
+        "y": 200,
+        "wires": [
+            [
+                "pred_occupancy_card"
+            ]
+        ]
+    },
+    {
+        "id": "test_prediction_inject",
+        "type": "inject",
+        "z": "d09df0669e54b0ea",
+        "name": "🤖 Test ML Prediction (Every 10s)",
+        "props": [],
+        "repeat": "10",
+        "once": true,
+        "onceDelay": 2,
+        "topic": "",
+        "x": 180,
+        "y": 600,
+        "wires": [
+            [
+                "prepare_python_input"
+            ]
+        ]
+    },
+    {
+        "id": "prepare_python_input",
+        "type": "function",
+        "z": "d09df0669e54b0ea",
+        "name": "Prepare Python ML Input",
+        "func": "// Prepare input data for Python ML prediction\nlet slots = flow.get(\"slots\") || {};\nlet occupied = Object.values(slots).filter(s => s.status === \"Occupied\").length;\nlet reserved = Object.values(slots).filter(s => s.status === \"Reserved\").length;\nlet totalSlots = 6;\nlet availableNow = totalSlots - occupied - reserved;\nlet occupancyRate = Math.round((occupied / totalSlots) * 100);\n\n// Get occupancy history for better predictions\nlet history = flow.get(\"occupancyHistory\") || [];\n\n// Create input data for Python script - matching the trained model's expected format\nlet pythonInput = {\n    \"parking_spot_id\": \"smart_parking_lot\",\n    \"timestamp\": new Date().toISOString(),\n    \"location\": \"main_lot\",\n    \"parking_type\": \"general\",\n    \"current_occupancy_rate\": occupancyRate,\n    \"reserved_slots\": reserved,\n    \"available_slots\": availableNow,\n    \"total_slots\": totalSlots,\n    \"history_length\": history.length\n};\n\nnode.status({fill:\"blue\",shape:\"dot\",text:\"Sending to Python ML\"});\nnode.log('Sending to Python ML: ' + JSON.stringify(pythonInput));\nreturn {payload: JSON.stringify(pythonInput)};",
+        "outputs": 1,
+        "x": 990,
+        "y": 20,
+        "wires": [
+            [
+                "python_exec_node",
+                "debug_python_input"
+            ]
+        ]
+    },
+    {
+        "id": "debug_python_input",
+        "type": "debug",
+        "z": "d09df0669e54b0ea",
+        "name": "Debug: Input to Python",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1240,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "debug_python_output",
+        "type": "debug",
+        "z": "d09df0669e54b0ea",
+        "name": "Debug: Python Output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1490,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "debug_python_error",
+        "type": "debug",
+        "z": "d09df0669e54b0ea",
+        "name": "Debug: Python Error",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1480,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "test_python_ml",
+        "type": "inject",
+        "z": "d09df0669e54b0ea",
+        "name": "🤖 Test Python ML",
+        "props": [],
+        "repeat": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 150,
+        "y": 700,
+        "wires": [
+            [
+                "prepare_python_input"
+            ]
+        ]
+    }
+]
